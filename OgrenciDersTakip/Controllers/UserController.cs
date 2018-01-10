@@ -35,6 +35,8 @@ namespace OgrenciDersTakip.Controllers
 
             var lesson = user.Lessons.ToList();
 
+
+            // lesson yerine user gönderip user'a ait lesson lar içerisinde dönme işlemine bak!!!
             return View(lesson);
         }
     }
