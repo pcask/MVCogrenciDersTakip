@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <h1>Login</h1>
+    </div>
+
+    <div>
+
+        <label>Kullanıcı Adı : </label>
+        <input type="text" id="txtUserName" name="txtUserName" /> <br /> <br />
+        <label>Şifre : </label>
+        <input type="password" id="txtUserPass" name="txtUserPass" /> <br /> <br />
+        <input type="button" id="btnGiris" name="btnGiris" value="GİRİŞ" /> <br /> <br />
+
+        <p id="message"></p>
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#btnGiris').bind('click', function () {
+                $.ajax({
+                    url: '/user/Login',
+                    method: 'post',
+                    data: { userName: $('#txtUserName').val(), password: $('#txtUserPass').val() },
+                    success: function (gelenData) {
+                        if (gelenData.Result) {
+                            window.location.href = "/user/Lesson?userID=" + gelenData.UserId;
+                        }
+                        else {
+                            $('#message').text("Lütfen kullanıcı adı veya şifre bilgilerinizi kontrol ediniz!!!");
+                            $('#message').css('color', 'red');
+                        }
+                    }
+                });
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>
